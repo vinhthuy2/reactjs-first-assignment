@@ -2,24 +2,32 @@ import React, {Component} from 'react';
 import './App.css';
 import Instruction from './Instruction';
 import UserOutput from './UserOutput/UserOutput'
-import UserInput from "./UserInput/UserInput";
 
 class App extends Component {
     state = {
-        username: "[username]"
+        users: [
+            {username: "[username1]"},
+            {username: "[username2]"}
+        ]
     };
 
-    changeNameHandler = (event)=>{
-        this.setState({username: event})
+    changeNameHandler = (event) => {
+        this.setState({
+            users: [
+                {username: event.target.value},
+                {username: "[username2]"}
+            ]
+        })
     };
 
     render() {
+        const style = {
+          color: "#e24556"
+        };
         return (
-            <div className="App">
+            <div style={style} className="App">
                 <Instruction/>
-                <UserInput changed={this.changeNameHandler}/>
-                <UserOutput username={this.state.username}/>
-                <UserOutput username="Vinh Thuy"/>
+                <UserOutput changed={this.changeNameHandler} username={this.state.users[0].username}/>
             </div>
         );
     }
